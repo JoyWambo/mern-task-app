@@ -4,6 +4,9 @@ const path = require("path");
 // Build the frontend
 const { execSync } = require("child_process");
 
+console.log("Installing frontend dependencies...");
+execSync("cd frontend && npm install", { stdio: "inherit" });
+
 console.log("Building frontend...");
 execSync("cd frontend && npm run build", { stdio: "inherit" });
 
