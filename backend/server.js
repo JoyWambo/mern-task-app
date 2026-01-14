@@ -23,7 +23,7 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "OK" });
 });
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production" || process.env.PORT) {
   console.log("Serving static files from:", path.join(__dirname, "public"));
   app.use(express.static(path.join(__dirname, "public")));
   app.get("*", (req, res) => {
