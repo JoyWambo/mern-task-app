@@ -3,7 +3,7 @@ import axios from "axios";
 import ProgressBar from "./components/ProgressBar";
 import "./App.css";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+const API_URL = "";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -25,7 +25,7 @@ function App() {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(`${API_URL}/tasks`);
+      const response = await axios.get(`${API_URL}/api/tasks`);
       setTasks(response.data);
       setLoading(false);
     } catch (error) {
@@ -38,9 +38,9 @@ function App() {
     e.preventDefault();
     try {
       if (editingTask) {
-        await axios.put(`${API_URL}/tasks/${editingTask._id}`, formData);
+        await axios.put(`${API_URL}/api/tasks/${editingTask._id}`, formData);
       } else {
-        await axios.post(`${API_URL}/tasks`, formData);
+        await axios.post(`${API_URL}/api/tasks`, formData);
       }
       fetchTasks();
       resetForm();
@@ -52,7 +52,7 @@ function App() {
   const deleteTask = async (id) => {
     if (window.confirm("Are you sure you want to delete this task?")) {
       try {
-        await axios.delete(`${API_URL}/tasks/${id}`);
+        await axios.delete(`${API_URL}/api/tasks/${id}`);
         fetchTasks();
       } catch (error) {
         console.error("Error deleting task:", error);
@@ -63,7 +63,9 @@ function App() {
   const toggleComplete = async (task) => {
     try {
       const newStatus = task.status === "completed" ? "pending" : "completed";
-      await axios.put(`${API_URL}/tasks/${task._id}`, { status: newStatus });
+      await axios.put(`${API_URL}/api/tasks/${task._id}`, {
+        status: newStatus,
+      });
       fetchTasks();
     } catch (error) {
       console.error("Error toggling task:", error);
@@ -76,7 +78,9 @@ function App() {
       tasks.map((t) => (t._id === task._id ? { ...t, liked: !t.liked } : t))
     );
     try {
-      await axios.put(`${API_URL}/tasks/${task._id}`, { liked: !task.liked });
+      await axios.put(`${API_URL}/api/tasks/${task._id}`, {
+        liked: !task.liked,
+      });
       // No need to fetch, as optimistic update is correct
     } catch (error) {
       console.error("Error toggling like:", error);
