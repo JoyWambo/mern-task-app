@@ -19,6 +19,10 @@ connectDB();
 
 app.use("/api/tasks", taskRoutes);
 
+app.get("/api/health", (req, res) => {
+  res.json({ status: "OK" });
+});
+
 if (process.env.NODE_ENV === "production") {
   console.log("Serving static files from:", path.join(__dirname, "public"));
   app.use(express.static(path.join(__dirname, "public")));
