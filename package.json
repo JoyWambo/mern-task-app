@@ -10,7 +10,6 @@
     "build": "node build.js",
     "build:frontend": "npm run build --prefix frontend",
     "build:backend": "echo 'Backend ready for deployment'",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run build"
   },
   "keywords": [],
