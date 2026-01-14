@@ -260,7 +260,7 @@ function App() {
       <div className="tasks-container">
         {filteredTasks.length === 0 ? (
           <div className="no-tasks">
-            <p>No tasks found. Create your first task to get started!</p>
+            <p>No tasks found. Create your first task to get started</p>
           </div>
         ) : (
           filteredTasks.map((task) => (
